@@ -12,7 +12,7 @@ step1:
         - mvn clean
         - mvn -B -U org.jacoco:jacoco-maven-plugin:prepare-agent verify
         - mvn -B -U org.jacoco:jacoco-maven-plugin:report
-        - mvn sonar:sonar -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.language=java -Dtest=**/*Test*.java -DfailIfNoTests=false -Dmaven.test.failure.ignore=true -Dsonar.core.codeCoveragePlugin=true -Dsonar.dynamicAnalysis=true -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+        - mvn sonar:sonar -Dsonar.language=java -Dtest=**/*Test*.java -DfailIfNoTests=false -Dmaven.test.failure.ignore=true -Dsonar.core.codeCoveragePlugin=true -Dsonar.dynamicAnalysis=true -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
 step2:
     stage: deploy
