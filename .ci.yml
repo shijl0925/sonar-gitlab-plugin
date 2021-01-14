@@ -1,0 +1,23 @@
+package: sonar-gitlab-plugin
+jdk: 1.8
+build_tool: maven-3.3.9
+type: jar
+stages:
+  - test
+  - deploy
+
+step1:
+    stage: test
+    script:
+        - mvn clean
+        - mvn -B -U org.jacoco:jacoco-maven-plugin:prepare-agent verify
+        - mvn -B -U org.jacoco:jacoco-maven-plugin:report
+        - mvn sonar:sonar -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN -Dsonar.language=java -Dtest=**/*Test*.java -DfailIfNoTests=false -Dmaven.test.failure.ignore=true -Dsonar.core.codeCoveragePlugin=true -Dsonar.dynamicAnalysis=true -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+
+step2:
+    stage: deploy
+    script:
+        - mvn -B -U install -Dmaven.test.skip=true -Djacoco.skip=true
+    is_pkg: true
+    pkgType: jar
+    pkgFolder: target
