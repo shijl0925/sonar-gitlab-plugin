@@ -18,6 +18,3 @@ step2:
     stage: deploy
     script:
         - mvn -B -U install -Dmaven.test.skip=true -Djacoco.skip=true
-    is_pkg: true
-    pkgType: jar
-    pkgFolder: target
