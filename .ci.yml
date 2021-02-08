@@ -1,5 +1,5 @@
 package: sonar-gitlab-plugin
-jdk: 1.8
+jdk: JDK8
 build_tool: maven-3.3.9
 type: jar
 stages:
